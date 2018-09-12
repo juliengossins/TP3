@@ -1,3 +1,4 @@
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,7 +15,7 @@ public class HomePage
     WebElement searchBar;
 
     @FindBy(className = "lsb")
-    WebElement searchButton;
+    WebElement embeddedSearchButton;
 
     public HomePage(WebDriver driver)
     {
@@ -25,6 +26,15 @@ public class HomePage
     public void Search(String Text)
     {
         this.searchBar.sendKeys(Text);
-        this.searchButton.click();
+    }
+
+    public void SearchByPressingEnter()
+    {
+        this.searchBar.sendKeys(Keys.ENTER);
+    }
+
+    public void SearchByClickingEmbeddedButton()
+    {
+        this.embeddedSearchButton.click();
     }
 }

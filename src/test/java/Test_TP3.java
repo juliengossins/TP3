@@ -31,11 +31,22 @@ public class Test_TP3
     }
 
     @Test
-    public void Test1()
+    public void SearchByPressingEnter()
     {
         HomePage homePage = new HomePage(this.webDriver);
         homePage.Search("Bordeaux");
-        ResultsPage resultsPage = new ResultsPage();
+        homePage.SearchByPressingEnter();
+        ResultsPage resultsPage = new ResultsPage(this.webDriver);
+        Assert.assertThat(resultsPage.GetResult(0), is("Site officiel de la ville de Bordeaux | Bordeaux"));
+    }
+
+    @Test
+    public void SearchByClickingEmbeddedSearchButton()
+    {
+        HomePage homePage = new HomePage(this.webDriver);
+        homePage.Search("Bordeaux");
+        homePage.SearchByClickingEmbeddedButton();
+        ResultsPage resultsPage = new ResultsPage(this.webDriver);
         Assert.assertThat(resultsPage.GetResult(0), is("Site officiel de la ville de Bordeaux | Bordeaux"));
     }
 }
