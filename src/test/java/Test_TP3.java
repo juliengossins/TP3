@@ -40,6 +40,18 @@ public class Test_TP3
         Assert.assertThat(resultsPage.GetResult(0), is("Site officiel de la ville de Bordeaux | Bordeaux"));
     }
 
+
+    @Test
+    public void SearchByClickingSearchButton()
+    {
+        HomePage homePage = new HomePage(this.webDriver);
+        homePage.Search("Bordeaux");
+        homePage.CloseSearchSuggestions();
+        homePage.SearchByClickingMainButton();
+        ResultsPage resultsPage = new ResultsPage(this.webDriver);
+        Assert.assertThat(resultsPage.GetResult(0), is("Site officiel de la ville de Bordeaux | Bordeaux"));
+    }
+
     @Test
     public void SearchByClickingEmbeddedSearchButton()
     {

@@ -17,6 +17,9 @@ public class HomePage
     @FindBy(className = "lsb")
     WebElement embeddedSearchButton;
 
+    @FindBy(name = "btnK")
+    WebElement mainSearchButton;
+
     public HomePage(WebDriver driver)
     {
         this.webDriver = driver;
@@ -36,5 +39,15 @@ public class HomePage
     public void SearchByClickingEmbeddedButton()
     {
         this.embeddedSearchButton.click();
+    }
+
+    public void SearchByClickingMainButton()
+    {
+        this.mainSearchButton.click();
+    }
+
+    public void CloseSearchSuggestions()
+    {
+        this.searchBar.sendKeys(Keys.ESCAPE);
     }
 }
