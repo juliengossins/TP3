@@ -5,6 +5,8 @@ import org.junit.Test;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
 import java.util.concurrent.TimeUnit;
 import static org.hamcrest.core.Is.is;
 
@@ -17,7 +19,17 @@ public class Test_TP3
     @Before
     public void Setup()
     {
-        this.webDriver = new ChromeDriver();
+        String browser = System.getProperty("browser");
+        if(browser == null)
+            browser = "";
+
+        if(browser.toLowerCase().equals("chrome"))
+            this.webDriver = new ChromeDriver();
+        else if(browser.toLowerCase().equals("firefox"))
+            this.webDriver = new FirefoxDriver();
+        else
+            this.webDriver = new ChromeDriver();
+
         this.webDriver.get("https://www.google.com");
         this.webDriver.manage().window().maximize();
         this.webDriver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
