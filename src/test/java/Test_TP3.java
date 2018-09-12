@@ -2,6 +2,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
@@ -11,7 +12,7 @@ public class Test_TP3
 {
     private WebDriver webDriver;
     private String searchText = "Bordeaux";
-    private String expectedResult = "Site officiel de la ville de Bordeaux | Bordeaux";
+    private String expectedResult = "www.bordeaux.fr/";
 
     @Before
     public void Setup()
@@ -33,9 +34,8 @@ public class Test_TP3
     {
         HomePage homePage = new HomePage(this.webDriver);
         homePage.Search(this.searchText);
-        homePage.SearchByPressingEnter();
-        ResultsPage resultsPage = new ResultsPage(this.webDriver);
-        Assert.assertThat(resultsPage.GetResult(0), is(this.expectedResult));
+        ResultsPage resultsPage = homePage.SearchByPressingEnter();
+        Assert.assertThat(resultsPage.GetResultLink(0), is(this.expectedResult));
     }
 
 
@@ -45,18 +45,16 @@ public class Test_TP3
         HomePage homePage = new HomePage(this.webDriver);
         homePage.Search(this.searchText);
         homePage.CloseSearchSuggestions();
-        homePage.SearchByClickingMainButton();
-        ResultsPage resultsPage = new ResultsPage(this.webDriver);
-        Assert.assertThat(resultsPage.GetResult(0), is(this.expectedResult));
+        ResultsPage resultsPage = homePage.SearchByClickingMainButton();
+        Assert.assertThat(resultsPage.GetResultLink(0), is(this.expectedResult));
     }
 
     @Test
     public void SearchByClickingEmbeddedSearchButton()
     {
         HomePage homePage = new HomePage(this.webDriver);
-        homePage.Search(this.searchText);
-        homePage.SearchByClickingEmbeddedButton();
-        ResultsPage resultsPage = new ResultsPage(this.webDriver);
-        Assert.assertThat(resultsPage.GetResult(0), is(this.expectedResult));
+        homePage.Search(this.searchText + Keys.DOWN);
+        ResultsPage resultsPage = homePage.SearchByClickingEmbeddedButton();
+        Assert.assertThat(resultsPage.GetResultLink(0), is(this.expectedResult));
     }
 }

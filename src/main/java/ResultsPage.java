@@ -1,6 +1,5 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -10,8 +9,8 @@ public class ResultsPage
 {
     WebDriver webDriver;
 
-    @FindBy(css = ".rc>.r>a")
-    List<WebElement> searchResultsHeaders;
+    @FindBy(className = "iUh30")
+    List<WebElement> searchResultsLinks;
 
     public ResultsPage(WebDriver driver)
     {
@@ -19,9 +18,9 @@ public class ResultsPage
         PageFactory.initElements(this.webDriver, this);
     }
 
-    public String GetResult(int Index)
+    public String GetResultLink(int Index)
     {
-        return this.searchResultsHeaders.get(Index).getText();
+        return this.searchResultsLinks.get(Index).getText();
     }
 }
 

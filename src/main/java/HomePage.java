@@ -31,19 +31,22 @@ public class HomePage
         this.searchBar.sendKeys(Text);
     }
 
-    public void SearchByPressingEnter()
+    public ResultsPage SearchByPressingEnter()
     {
         this.searchBar.sendKeys(Keys.ENTER);
+        return new ResultsPage(this.webDriver);
     }
 
-    public void SearchByClickingEmbeddedButton()
+    public ResultsPage SearchByClickingEmbeddedButton()
     {
         this.embeddedSearchButton.click();
+        return new ResultsPage(this.webDriver);
     }
 
-    public void SearchByClickingMainButton()
+    public ResultsPage SearchByClickingMainButton()
     {
         this.mainSearchButton.click();
+        return new ResultsPage(this.webDriver);
     }
 
     public void CloseSearchSuggestions()
