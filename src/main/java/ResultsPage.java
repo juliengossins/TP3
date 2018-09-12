@@ -21,10 +21,7 @@ public class ResultsPage
 
     public String GetResult(int Index)
     {
-        if(Index < this.searchResultsHeaders.size())
-            return this.searchResultsHeaders.get(Index).getText();
-
-        return "";
+        return this.searchResultsHeaders.get(Index).getText();
     }
 }
 

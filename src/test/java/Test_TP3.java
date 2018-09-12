@@ -4,16 +4,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
-import javax.xml.transform.Result;
-
 import java.util.concurrent.TimeUnit;
-
 import static org.hamcrest.core.Is.is;
 
 public class Test_TP3
 {
     private WebDriver webDriver;
+    private String searchText = "Bordeaux";
+    private String expectedResult = "Site officiel de la ville de Bordeaux | Bordeaux";
 
     @Before
     public void Setup()
@@ -34,10 +32,10 @@ public class Test_TP3
     public void SearchByPressingEnter()
     {
         HomePage homePage = new HomePage(this.webDriver);
-        homePage.Search("Bordeaux");
+        homePage.Search(this.searchText);
         homePage.SearchByPressingEnter();
         ResultsPage resultsPage = new ResultsPage(this.webDriver);
-        Assert.assertThat(resultsPage.GetResult(0), is("Site officiel de la ville de Bordeaux | Bordeaux"));
+        Assert.assertThat(resultsPage.GetResult(0), is(this.expectedResult));
     }
 
 
@@ -45,20 +43,20 @@ public class Test_TP3
     public void SearchByClickingSearchButton()
     {
         HomePage homePage = new HomePage(this.webDriver);
-        homePage.Search("Bordeaux");
+        homePage.Search(this.searchText);
         homePage.CloseSearchSuggestions();
         homePage.SearchByClickingMainButton();
         ResultsPage resultsPage = new ResultsPage(this.webDriver);
-        Assert.assertThat(resultsPage.GetResult(0), is("Site officiel de la ville de Bordeaux | Bordeaux"));
+        Assert.assertThat(resultsPage.GetResult(0), is(this.expectedResult));
     }
 
     @Test
     public void SearchByClickingEmbeddedSearchButton()
     {
         HomePage homePage = new HomePage(this.webDriver);
-        homePage.Search("Bordeaux");
+        homePage.Search(this.searchText);
         homePage.SearchByClickingEmbeddedButton();
         ResultsPage resultsPage = new ResultsPage(this.webDriver);
-        Assert.assertThat(resultsPage.GetResult(0), is("Site officiel de la ville de Bordeaux | Bordeaux"));
+        Assert.assertThat(resultsPage.GetResult(0), is(this.expectedResult));
     }
 }
